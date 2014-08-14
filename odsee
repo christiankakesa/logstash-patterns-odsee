@@ -11,7 +11,7 @@ ODSEE_LDAP connection from %{HOSTPORT:ldap_connection_from} to %{HOSTPORT:ldap_c
 ## This LDAP command is handle correctly by GREEDYDATA
 ODSEE_SSL
 
-## This commanbd handles no messages
+## This command output no message
 #ODSEE_UNBIND
 #ODSEE_CLOSED
 #ODSEE_CLOSING
