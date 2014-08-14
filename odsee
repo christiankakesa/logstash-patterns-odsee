@@ -1,0 +1,22 @@
+# Oracle Directory Server Enterprise Edition format pattern
+ODSEE_DATETIME %{MONTHDAY}/%{MONTH}/%{YEAR}:%{TIME} %{ISO8601_TIMEZONE}
+ODSEE_SRCH base=%{QS:srch_base_dn} scope=%{NUMBER:srch_scope} filter=%{QS:srch_filter} attrs=%{WORD:srch_attrs}
+ODSEE_BIND dn=%{QS:bind_dn} method=%{NUMBER:bind_method} version=%{NUMBER:bind_version}
+ODSEE_RESULT err=%{NUMBER:result_err} tag=%{NUMBER:result_tag} nentries=%{NUMBER:result_nentries} etime=%{NUMBER:result_etime}
+ODSEE_ABANDON targetop=%{NUMBER:abandon_targetop_source} msgid=%{NUMBER:abandon_messageid_source} nentries=%{NUMBER:abandon_nentries_source} etime=%{NUMBER:abandon_etime_source},targetop=%{NUMBER:abandon_targetop_target} msgid=%{NUMBER:abandon_msgid_target} nentries=%{NUMBER:abandon_nentries_target} etime=%{NUMBER:abandon_msgid_target}
+ODSEE_ADD dn=%{QS:add_dn_source},dn=%{QS:add_dn_target}
+ODSEE_MOD %{ODSEE_ADD}
+ODSEE_LDAP connection from %{HOSTPORT:ldap_connection_from} to %{HOSTPORT:ldap_connection_to}
+
+## This LDAP command is handle correctly by GREEDYDATA
+ODSEE_SSL
+
+## This commanbd handles no messages
+#ODSEE_UNBIND
+#ODSEE_CLOSED
+#ODSEE_CLOSING
+#ODSEE_EXT
+
+# Pattern
+ODSEE \[%{ODSEE_DATETIME:timestamp}\] conn=%{NUMBER:connection} op=%{NUMBER:operation} msgId=%{NUMBER:messageid} -(?: fd=%{NUMBER:fd} slot=%{NUMBER:slot})? %{WORD:command}\.?(?: (?:%{ODSEE_SRCH}|%{ODSEE_BIND}|%{ODSEE_RESULT}|%{ODSEE_ABANDON}|%{ODSEE_ADD}|%{ODSEE_MOD}|%{ODSEE_LDAP}|%{GREEDYDATA:message}))?
+
