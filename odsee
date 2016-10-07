@@ -19,4 +19,3 @@ ODSEE_SSL
 
 # Pattern
 ODSEE \[%{ODSEE_DATETIME:timestamp}\] conn=%{NUMBER:connection} op=%{NUMBER:operation} msgId=%{NUMBER:messageid} -(?: fd=%{NUMBER:fd} slot=%{NUMBER:slot})? %{WORD:command}\.?(?: (?:%{ODSEE_SRCH}|%{ODSEE_BIND}|%{ODSEE_RESULT}|%{ODSEE_ABANDON}|%{ODSEE_ADD}|%{ODSEE_MOD}|%{ODSEE_LDAP}|%{GREEDYDATA:message}))?
-
